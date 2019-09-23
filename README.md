@@ -1,3 +1,8 @@
+# Note to self:
+The repo is an attempt to learn Flutter for mobile development. The app demonstrate the use of a stateful widgets to support some basic interaction with the app.
+
+
+Credit to App Brewery for the initial repo.
 ![App Brewery Banner](https://github.com/londonappbrewery/Images/blob/master/AppBreweryBanner.png)
 
 
