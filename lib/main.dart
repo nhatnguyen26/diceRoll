@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:math';
-import 'dart:io';
+
+import 'package:flutter/material.dart';
 
 void main() {
   return runApp(
@@ -25,10 +25,24 @@ class DicePage extends StatefulWidget {
   }
 }
 
-class DicePageState extends State<DicePage> {
+class DicePageState extends State<DicePage>
+    with SingleTickerProviderStateMixin {
   int leftDice = 1;
   int rightDice = 1;
   Random random = Random();
+
+  AnimationController animationController;
+  Animation animation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 3),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +50,13 @@ class DicePageState extends State<DicePage> {
       child: Row(
         children: <Widget>[
           Expanded(
-            child: FlatButton(
+            child: TextButton(
               onPressed: diceClick,
               child: Image.asset('images/dice$leftDice.png'),
             ),
           ),
           Expanded(
-            child: FlatButton(
+            child: TextButton(
               onPressed: diceClick,
               child: Image.asset('images/dice$rightDice.png'),
             ),
@@ -53,9 +67,14 @@ class DicePageState extends State<DicePage> {
   }
 
   void diceClick() {
-    setState(() {
-      leftDice = random.nextInt(6) + 1;
-      rightDice = random.nextInt(6) + 1;
+    animationController.reset();
+    animationController.forward();
+    animationController.addListener(() {
+      setState(() {
+        leftDice = random.nextInt(6) + 1;
+        rightDice = random.nextInt(6) + 1;
+      });
     });
+
   }
 }
